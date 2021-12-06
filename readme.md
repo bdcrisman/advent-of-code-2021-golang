@@ -1,4 +1,4 @@
-# advent of code 2021
+# [advent of code 2021](https://adventofcode.com/2021)
 
 ## description
 - my attempt at trying to keep up with the advent of 2021
