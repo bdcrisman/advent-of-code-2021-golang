@@ -7,6 +7,9 @@ import (
 )
 
 func main() {
-	d1p1 := day1.Day1Part1("input")
+	d1p1 := day1.Day1("input", true)
 	fmt.Printf("Day 1 Part 1 :: Number increases: %d\n", d1p1)
+
+	d1p2 := day1.Day1("input", false)
+	fmt.Printf("Day 1 Part 2 :: Number increases: %d\n", d1p2)
 }
