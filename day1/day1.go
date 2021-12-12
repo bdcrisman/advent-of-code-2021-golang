@@ -8,7 +8,7 @@ import (
 
 // Gets the number of increases occurring in the data.
 func Day1(inputPath string, isPart1 bool) int {
-	path := filepath.Join("day1", "")
+	path := filepath.Join("day1", inputPath)
 	data, err := utils.ReadAsIntArray(path)
 	if err != nil {
 		println(err.Error())
