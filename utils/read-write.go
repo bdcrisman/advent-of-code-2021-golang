@@ -7,19 +7,13 @@ import (
 	"strings"
 )
 
-func TestEcho(s string) string {
-	return s
-}
-
+// Reads data from file in as an int array.
 func ReadAsIntArray(path string) ([]int, error) {
-	data, err := ioutil.ReadFile(path)
+	scanner, err := FileScanner(path)
 	if err != nil {
 		return nil, err
 	}
 
-	r := strings.NewReader(string(data))
-	scanner := bufio.NewScanner(r)
-	scanner.Split(bufio.ScanWords)
 	var result []int
 
 	for scanner.Scan() {
@@ -31,4 +25,18 @@ func ReadAsIntArray(path string) ([]int, error) {
 	}
 
 	return result, scanner.Err()
+}
+
+// Reads in file and returns the scanner.
+func FileScanner(path string) (*bufio.Scanner, error) {
+	data, err := ioutil.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+
+	r := strings.NewReader(string(data))
+	scanner := bufio.NewScanner(r)
+	scanner.Split(bufio.ScanWords)
+
+	return scanner, nil
 }
