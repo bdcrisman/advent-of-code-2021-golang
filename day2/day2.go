@@ -16,26 +16,56 @@ func Day2(inputPath string, isPart1 bool) int {
 		return 0
 	}
 
-	return calculateCommands(data)
+	return calculateCommands(data, isPart1)
 }
 
-func calculateCommands(lines []string) int {
+func calculateCommands(lines []string, isPart1 bool) int {
 	var hpos int
 	var depth int
+	var aim int
 
 	for _, line := range lines {
 		cmd := parseCommand(line)
 
 		if strings.Contains(line, "forward") {
-			hpos += cmd
+			handleForward(&hpos, &depth, &aim, cmd, isPart1)
+			// hpos += cmd
 		} else if strings.Contains(line, "up") {
-			depth -= cmd
+			handleUp(&depth, &aim, cmd, isPart1)
+			// depth -= cmd
 		} else if strings.Contains(line, "down") {
-			depth += cmd
+			handleDown(&depth, &aim, cmd, isPart1)
+			// depth += cmd
 		}
 	}
 
 	return hpos * depth
+}
+
+func handleDown(depth *int, aim *int, i int, isPart1 bool) {
+	if isPart1 {
+		*depth += i
+		return
+	}
+	*aim += i
+}
+
+func handleUp(depth *int, aim *int, i int, isPart1 bool) {
+	if isPart1 {
+		*depth -= i
+		return
+	}
+	*aim -= i
+}
+
+func handleForward(hpos *int, depth *int, aim *int, i int, isPart1 bool) {
+	if isPart1 {
+		*hpos += i
+		return
+	}
+
+	*hpos += i
+	*depth += *aim * i
 }
 
 func parseCommand(line string) int {

@@ -15,4 +15,6 @@ func main() {
 
 	d2p1 := day2.Day2("input", true)
 	fmt.Printf("Day 2 Part 1: %d\n", d2p1)
+	d2p2 := day2.Day2("input", false)
+	fmt.Printf("Day 2 Part 1: %d\n", d2p2)
 }
