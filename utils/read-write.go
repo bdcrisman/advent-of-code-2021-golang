@@ -8,6 +8,55 @@ import (
 	"strings"
 )
 
+// Reads input from path as 2-dim column integer array.
+func ReadAsTwoDimIntColArray(path string) ([][]int, error) {
+	scanner, err := FileScanner(path)
+	if err != nil {
+		return nil, err
+	}
+
+	var result [][]int
+	var numCols int
+
+	for scanner.Scan() {
+		s := scanner.Text()
+		split := strings.Split(s, "")
+		if numCols <= 0 {
+			numCols = len(split)
+			result = make([][]int, numCols)
+		}
+
+		for index, v := range split {
+			digit, _ := strconv.Atoi(v)
+			result[index] = append(result[index], digit)
+		}
+	}
+	return result, nil
+}
+
+// Reads input from path as 2-dimensional string array.
+func ReadAsTwoDimStrArray(path string) ([][]string, error) {
+	scanner, err := FileScanner(path)
+	if err != nil {
+		return nil, err
+	}
+
+	var indices int
+	var result [][]string
+
+	for scanner.Scan() {
+		s := scanner.Text()
+		split := strings.Split(s, "")
+		if len(split) <= 0 || len(split) < indices {
+			continue
+		}
+
+		result = append(result, split)
+	}
+
+	return result, nil
+}
+
 // Reads input from path as 2-dimensional integer array.
 func ReadAsTwoDimIntArray(path string) ([][]int, error) {
 	scanner, err := FileScanner(path)

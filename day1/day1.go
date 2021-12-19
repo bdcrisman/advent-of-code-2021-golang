@@ -1,15 +1,12 @@
 package day1
 
 import (
-	"path/filepath"
-
 	"github.com/bdcrisman/advent-of-code/2021/utils"
 )
 
 // Gets the number of increases occurring in the data.
 func Day1(inputPath string, isPart1 bool) int {
-	path := filepath.Join("day1", inputPath)
-	data, err := utils.ReadAsIntArray(path)
+	data, err := utils.ReadAsIntArray(inputPath)
 	if err != nil {
 		println(err.Error())
 		return 0

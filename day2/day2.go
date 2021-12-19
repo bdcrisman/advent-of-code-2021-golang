@@ -1,7 +1,6 @@
 package day2
 
 import (
-	"path/filepath"
 	"strconv"
 	"strings"
 
@@ -9,8 +8,7 @@ import (
 )
 
 func Day2(inputPath string, isPart1 bool) int {
-	path := filepath.Join("day2", inputPath)
-	data, err := utils.ReadAsStringArray(path)
+	data, err := utils.ReadAsStringArray(inputPath)
 	if err != nil {
 		println(err.Error())
 		return 0
