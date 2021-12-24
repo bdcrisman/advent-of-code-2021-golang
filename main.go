@@ -12,9 +12,9 @@ import (
 func main() {
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	d1p1 := day1.Day1(filepath.Join("day1", "input"), true)
-	fmt.Printf("Day 1 Part 1 :: Number increases: %d\n", d1p1)
+	fmt.Printf("Day 1 Part 1: %d\n", d1p1)
 	d1p2 := day1.Day1(filepath.Join("day1", "input"), false)
-	fmt.Printf("Day 1 Part 2 :: Number increases: %d\n", d1p2)
+	fmt.Printf("Day 1 Part 2: %d\n", d1p2)
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	d2p1 := day2.Day2(filepath.Join("day2", "input"), true)
@@ -25,6 +25,6 @@ func main() {
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	d3p1 := day3.Day3(filepath.Join("day3", "input"), true)
 	fmt.Printf("Day 3 Part 1: %d\n", d3p1)
-	d3p2 := day3.Day3(filepath.Join("day3", "example"), false)
+	d3p2 := day3.Day3(filepath.Join("day3", "input"), false)
 	fmt.Printf("Day 3 Part 2: %d\n", d3p2)
 }

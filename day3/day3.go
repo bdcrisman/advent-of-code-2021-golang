@@ -4,6 +4,7 @@ import (
 	"log"
 	"sort"
 	"strconv"
+	"strings"
 
 	"github.com/bdcrisman/advent-of-code/2021/utils"
 )
@@ -110,8 +111,12 @@ func findLifeSupportRating(data []string) int64 {
 
 func findRating(data []string, index int, isO2Rating bool) int64 {
 	if len(data) == 1 {
-		println("final:", data[0])
 		v, _ := strconv.ParseInt(data[0], 2, 64)
+		return v
+	}
+
+	if len(data) == 2 {
+		v, _ := strconv.ParseInt(selectFromTwo(data, isO2Rating), 2, 64)
 		return v
 	}
 
@@ -120,7 +125,6 @@ func findRating(data []string, index int, isO2Rating bool) int64 {
 
 	sort.Strings(data)
 	for i, row := range data {
-		println(index, ":", row)
 		v, _ := strconv.Atoi(string(row[index]))
 		if v == 0 {
 			zeroCount++
@@ -130,21 +134,39 @@ func findRating(data []string, index int, isO2Rating bool) int64 {
 		break
 	}
 
+	half := len(data) / 2
+	temp := takeSlice((isO2Rating && zeroCount > half) || (!isO2Rating && zeroCount <= half), data, lastIndex)
+	return findRating(temp, index+1, isO2Rating)
+}
+
+func takeSlice(isTakeZeroes bool, data []string, lastIndex int) []string {
 	var temp []string
 
-	// somehow check if there are 2 values left and if has both 1 and 0...
-	// if o2, select 1, else select 0
-	half := len(data) / 2
-
-	if zeroCount > half {
+	if isTakeZeroes {
 		temp = make([]string, lastIndex)
 		copy(temp, data[:lastIndex])
-	} else if zeroCount == half {
-
 	} else {
 		temp = make([]string, len(data)-lastIndex)
 		copy(temp, data[lastIndex:])
 	}
 
-	return findRating(temp, index+1, isO2Rating)
+	return temp
+}
+
+func selectFromTwo(data []string, isO2Rating bool) string {
+	var suffix string
+	var value string
+	if isO2Rating {
+		suffix = "1"
+	} else {
+		suffix = "0"
+	}
+
+	for _, v := range data {
+		if strings.HasSuffix(v, suffix) {
+			value = v
+		}
+	}
+
+	return value
 }
